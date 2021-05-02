@@ -1,0 +1,96 @@
+
+<div class="container m-4">
+  <h3>Create New Product</h3>
+  <form (ngSubmit)="createToDo()">
+    <div class="row">
+      <div class="form-group col-md-2">
+        <input
+          [(ngModel)]="name"
+          placeholder="Enter name"
+          class="form-control"
+          name="name"
+        />
+      </div>
+      <div class="form-group col-md-2">
+        <input
+          [(ngModel)]="brand"
+          placeholder="Enter brand"
+          class="form-control"
+          name="brand"
+        />
+      </div>
+      <div class="form-group col-md-2">
+        <input
+          [(ngModel)]="stockCode"
+          placeholder="Enter stock code"
+          class="form-control"
+          name="stockCode"
+        />
+      </div>
+      <div class="form-group col-md-2">
+        <input
+         type="number"
+          [(ngModel)]="amount"
+          placeholder="Enter amount"
+          class="form-control"
+          name="amount"
+        />
+        </div>
+
+        <div class="form-group col-md-1">
+         
+        <input type="checkbox" [(ngModel)]="status"  name="status">
+        Status
+      </div>
+      <div class="col-md-2">
+        <button type="submit" class="btn btn-primary" style="Width:70px;">
+          <span *ngIf="id==null">Save</span>
+          <span *ngIf="id!=null">Update</span>
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="Container-fluid"  style="margin: 2em;">
+  <h2>Product List</h2>
+
+  <div *ngIf="productError?.message">
+    <div class="alert alert-danger" role="alert" id="productError">
+      Some error occurred. Please try again
+    </div>
+  </div>
+
+    <div class="row">
+
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Brand</th>
+            <th>Stock Code</th>
+            <!-- <th>Created At </th>
+            <th>Updated At</th> -->
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let x of Product">
+            <td>{{ x.name }}</td>
+            <td>{{ x.amount }}</td>
+            <td>{{ x.brand }}</td>
+            <td>{{ x.stockCode }}</td>
+            <!-- <td>{{ x.createdAt | date}}</td>
+            <td>{{ x.lastUpdatedAt | date }}</td>  -->
+            <td> <input type="checkbox" [(ngModel)]="x.status"> </td>
+            <td>
+               <button class="btn btn-sm btn-primary" (click)="edit(x)">Edit</button>
+               <button class="btn btn-sm btn-danger ml-2" (click)="delete(x)">Remove</button> 
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
